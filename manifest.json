@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "Website Guard",
+    "description": "Protect yourself from unsecure and scam websites.",
+    "version": "0.1.0",
+    "action": {
+        "default_icon": "hello_extensions.png"
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "scripts/content.js",
+                "scripts/siteData.js"
+            ],
+            "matches": [
+                "<all_urls>"
+            ],
+            "type": "module"
+        }
+    ]
+}
