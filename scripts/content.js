@@ -3,7 +3,7 @@
  * 
  * @type {string}
  */
-var apiKey = "at_i4psk18eRTcH0fjsJoFSCnLTZdVsJ";
+var apiKey = "YOUR_API_KEY_HERE";
 /**
  * WIP
  *
