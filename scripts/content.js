@@ -3,13 +3,13 @@
  * 
  * @type {string}
  */
-var apiKey = "YOUR_API_KEY_HERE";
+var apiKey = "at_i4psk18eRTcH0fjsJoFSCnLTZdVsJ";
 /**
  * WIP
  *
  * @type {string}
  */
-var popup = "https://google.com";
+var popup = chrome.runtime.getURL("pages/redirected_page.html");
 /**
  * Endpoint to send request to minus queries.
  *
@@ -64,6 +64,8 @@ function queryWHOIS(href) {
  * @returns {boolean}: True if it is a risky site.
  */
 function isRiskySite(site) {
+    console.log("Days since creation:", site.getDaysSinceCreation());
+    console.log("Registered time:", site.getRegisteredTime());
     if(site.getDaysSinceCreation() <= 90 || site.getRegisteredTime() <= 365) {
         console.log("Website Guard: Detected a risky site.");
         return true;
@@ -78,7 +80,8 @@ function isRiskySite(site) {
  */
 function redirectToSafeSite(){
     console.log("Redirecting to safe site.");
-    // window.location.replace(popup);
+    console.log(popup);
+    window.location.replace(popup);
 }
 
 async function main() {

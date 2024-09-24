@@ -32,14 +32,14 @@ class SiteData {
      */
     constructor(url, createdDateQuery, expiresDateQuery) {
         this.url = url;
-        this.createdDate = new Date(createdDateQuery.textContent);
-        this.expiresDate = new Date(expiresDateQuery.textContent);
+        this.createdDate = createdDateQuery.textContent ? new Date(createdDateQuery.textContent): null;
+        this.expiresDate = expiresDateQuery.textContent ? new Date(expiresDateQuery.textContent) : null;
 
         const presentDate = new Date();
         const converstionToDays = 1000 * 60 * 60 * 24;
 
-        this.daysSinceCreation = Math.floor((presentDate - this.createdDate) / converstionToDays);
-        this.registeredTime = Math.floor((this.expiresDate - this.createdDate) / converstionToDays);
+        this.daysSinceCreation = this.createdDate ?  Math.floor((presentDate - this.createdDate) / converstionToDays): null;
+        this.registeredTime = this.createdDate && this.expiresDate ? Math.floor((this.expiresDate - this.createdDate) / converstionToDays) : null;
     }
 
     // Getters
