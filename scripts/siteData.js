@@ -30,10 +30,14 @@ class SiteData {
      * @param {string} createdDateQuery 
      * @param {string} expiresDateQuery 
      */
-    constructor(url, createdDateQuery, expiresDateQuery) {
-        this.url = url;
-        this.createdDate = createdDateQuery.textContent ? new Date(createdDateQuery.textContent): null;
-        this.expiresDate = expiresDateQuery.textContent ? new Date(expiresDateQuery.textContent) : null;
+    constructor(href, whois) {
+        const registryData = whois.querySelector("registryData");
+        const createdDateData = registryData.querySelector("createdDate");
+        const expiresDateData = registryData.querySelector("expiresDate");
+
+        this.url = href;
+        this.createdDate = createdDateData ? new Date(expiresDateData.textContent) : null;
+        this.expiresDate = expiresDateData ? new Date(expiresDateData.textContent) : null;
 
         const presentDate = new Date();
         const converstionToDays = 1000 * 60 * 60 * 24;

@@ -1,11 +1,6 @@
-/**
- * API key
- * 
- * @type {string}
- */
 var apiKey = "YOUR_API_KEY_HERE";
 /**
- * WIP
+ * Page that Website Guard redirects to.
  *
  * @type {string}
  */
@@ -46,7 +41,7 @@ function queryWHOIS(href) {
         .then((str) => {
             const parser = new DOMParser();
             const whois = parser.parseFromString(str, "text/xml");
-            siteData = new SiteData(href, whois.querySelector("createdDate"), whois.querySelector("expiresDate"));
+            siteData = new SiteData(href, whois);
             resolve(siteData);
         })
         .catch((error) => {
@@ -64,8 +59,6 @@ function queryWHOIS(href) {
  * @returns {boolean}: True if it is a risky site.
  */
 function isRiskySite(site) {
-    console.log("Days since creation:", site.getDaysSinceCreation());
-    console.log("Registered time:", site.getRegisteredTime());
     if(site.getDaysSinceCreation() <= 90 || site.getRegisteredTime() <= 365) {
         console.log("Website Guard: Detected a risky site.");
         return true;
@@ -79,7 +72,6 @@ function isRiskySite(site) {
  * When a risky site is encountered, call this function to redirect to safety.
  */
 function redirectToSafeSite(){
-    console.log("Redirecting to safe site.");
     console.log(popup);
     window.location.replace(popup);
 }
